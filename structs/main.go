@@ -22,5 +22,23 @@ func main() {
 			zipCode: "10001",
 		},
 	}
-	fmt.Printf("%+v", jim)
+	// &jim will give address to the value
+	jimPointer := &jim
+	jimPointer.updateName("james")
+	jim.print()
+
+	//without using address
+	jim.updateName("jimmy")
+	jim.print()
+
+	// struct functions will use a copy of struct to do operation is operated without pointer
+	// same is not true for slice, without pointers we can update slice.
+}
+
+func (pointerToPerson *person) updateName(newFirstName string) {
+	(*pointerToPerson).firstName = newFirstName
+}
+
+func (p person) print() {
+	fmt.Printf("%+v",p)
 }
